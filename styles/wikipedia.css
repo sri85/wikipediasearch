@@ -2,13 +2,12 @@ body {
   font-family: 'Lato', sans-serif;
 }
 .btn-search {
-  padding-top: 10px;
-  padding-left: 20px;
-  padding-right: 50px;
-  padding-bottom: 40px;
+
+  margin-top:20px;
 }
 
 .btn-random {
+
   padding-top: 10px;
   padding-left: 20px;
   padding-right: 50px;

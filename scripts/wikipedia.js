@@ -1,9 +1,19 @@
 $('document').ready(function(){
-  $('#search').click(function(){
+
+  //Searching on Enter
+  $("#searchterm").keydown(e =>{
+    if(e.which === 13){
+       $("#search").click();
+    }
+});
+
+  $('#search').click(()=>{
     let searchTerm = ($("#searchterm").val());
     if (searchTerm !== ""){
+      $("#searchresults").empty();
       $("#searchresults").show();
-     getWikiArticles(searchTerm);
+      getWikiArticles(searchTerm);
+
     }
 
   });
@@ -24,7 +34,7 @@ $('document').ready(function(){
             +'</a>')
 
         }
-      
+
 
   },error: function(err){
 

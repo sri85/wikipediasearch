@@ -16,7 +16,7 @@
   <!-- Bootstrap core CSS -->
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  
+
 
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
@@ -36,25 +36,25 @@
   <div class="container">
     <div class="jumbotron text-center">
       <h2>Wikipedia Search</h2>
-      <form id ="searchform" class="form-inline">
+      <div class="row">
         <div class="input-group">
-          <input type="search" id="searchterm" class="form-control" size="50" placeholder="Search Wikipedia" required="">
-          <div class="row">
-            <div class="col-xs-6 btn-search">
-              <button id="search" type="submit" class="btn btn-default btn-lg">Wikipedia Search</button>
-            </div>
-            <div class="col-xs-6 btn-random">
-              <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank" class="btn btn-default btn-lg" role="button">Surprise Me!</a>
-            </div>
-          </div>
+      <input type="search" id="searchterm" size="50" class="form-control" placeholder="Wikipedia Search">
+      <span class="input-group-btn">
+        <button id="search" type="button" class="btn btn-default">Search</button>
+      </span>
+    </div>
+    </div>
+        <div class="col btn-random">
+          <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank" class="btn btn-default btn-lg" role="button">Surprise Me!</a>
         </div>
-      </form>
+
+
       <div id="searchresults" class="list-group" style="display:none">
       </div>
+
+
     </div>
-
   </div>
-
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
