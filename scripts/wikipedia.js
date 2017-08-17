@@ -1,45 +1,52 @@
-$('document').ready(function(){
+$('document').ready(function() {
+
+  function getSearchText() {
+    return $("#searchterm").val();
+  }
 
   //Searching on Enter
-  $("#searchterm").keydown(e =>{
-    if(e.which === 13){
-       $("#search").click();
+  $("#searchterm").keydown(key => {
+    cont ENTER_KEYCODE = 13;
+    if (key.which === ENTER_KEYCODE) {
+      $("#search").click();
     }
-});
+  });
 
-  $('#search').click(()=>{
-    let searchTerm = ($("#searchterm").val());
-    if (searchTerm !== ""){
+  $('#search').click(() => {
+    let searchTerm = getSearchText();
+    if (searchTerm !== "") {
       $("#searchresults").empty();
       $("#searchresults").show();
       getWikiArticles(searchTerm);
-
     }
 
   });
 
   function getWikiArticles(searchTerm) {
-    let wikiApi = "https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrsearch="+searchTerm+"&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=10"
-    $.ajax({url: wikiApi,
-    success: (articles) => {
+    const wikiApiUrl = "https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrsearch=" + searchTerm + "&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=10"
+    $.ajax({
+      url: wikiApiUrl,
+      success: (wikiArticles) => {
 
-      let keys =(Object.keys(articles["query"]["pages"]));
+        let wikiArticleIds = Object.keys(wikiArticles["query"]["pages"]);
 
-        for(let i =0; i<keys.length; i++){
-          let key = keys[i];
+        for (let i = 0; i < wikiArticleIds.length; i++) {
+          let wikiArticleId = wikiArticleIds[i];
+          let wikiArticleTitle =  wikiArticles["query"]["pages"][wikiArticleId]["title"];
+          let wikiArticleSummary = wikiArticles["query"]["pages"][wikiArticleId]["extract"];
 
-            $("#searchresults").append('<a href=https://en.wikipedia.org/?curid='+[key]+' class="list-group-item" target="_blank">'
-              +'<h4 class="list-group-item-heading">'+articles["query"]["pages"][key]["title"]+'</h4>'+
-              '<p class="list-group-item-text">'+articles["query"]["pages"][key]["extract"]+'</p>'
-            +'</a>')
+          $("#searchresults").append('<a href=https://en.wikipedia.org/?curid=' +wikiArticleId+ ' class="list-group-item" target="_blank">' +
+            '<h4 class="list-group-item-heading">' + wikiArticleTitle + '</h4>' +
+            '<p class="list-group-item-text">' + wikiArticleSummary + '</p>' +
+            '</a>')
 
         }
-
-
-  },error: function(err){
-
-  },dataType: "jsonp"});
-}
-return false;
+      },
+      error: function(err) {
+        console.log("Something went wrong with search results ",err);
+      },
+      dataType: "jsonp"
+    });
+  }
 
 });
