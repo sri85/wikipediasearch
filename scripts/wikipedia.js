@@ -6,7 +6,7 @@ $('document').ready(function() {
 
   //Searching on Enter
   $("#searchterm").keydown(key => {
-    cont ENTER_KEYCODE = 13;
+    const ENTER_KEYCODE = 13;
     if (key.which === ENTER_KEYCODE) {
       $("#search").click();
     }
